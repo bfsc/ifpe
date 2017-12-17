@@ -52,6 +52,7 @@ public class AlunoDAO {
 				
 		Connection conn = cnxjdbc.Conection();
 		
+		
 		try {
 			
 			pst = conn.prepareStatement(SQL_INSERE_ALUNO);
