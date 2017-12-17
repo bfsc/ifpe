@@ -2,13 +2,18 @@ package com.IF.apresentacao;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import com.IF.Main;
+import com.IF.dao.AlunoDAO;
+import com.IF.entidades.Aluno;
+import com.IF.excecoes.AlunoInvalidoException;
+import com.IF.negocio.ControladorCadastroAluno;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -49,6 +54,23 @@ public class CadastrarAlunoJPanel extends JPanel {
 		add(textNumMatricula);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Aluno aluno = new Aluno();
+				
+				aluno.setNome(textNomeAluno.getText());
+				aluno.setNumMatricula(textNumMatricula.getText());
+				
+				try {
+					ControladorCadastroAluno ControladorCadastro = new ControladorCadastroAluno();
+					ControladorCadastro.cadastrarAluno(aluno);
+				} catch (AlunoInvalidoException excecao) {
+					textNomeAluno.setForeground(Color.BLACK);
+					textNumMatricula.setForeground(Color.BLACK);
+				}
+				
+			}
+		});
 		btnCadastrar.setFont(new Font("Arial Black", Font.BOLD, 13));
 		btnCadastrar.setBounds(658, 520, 120, 30);
 		add(btnCadastrar);
@@ -69,21 +91,29 @@ public class CadastrarAlunoJPanel extends JPanel {
 		btnVoltar.setBounds(35, 520, 120, 30);
 		add(btnVoltar);
 		
-		JButton btnCadastrarDigital = new JButton("Digital");
-		btnCadastrarDigital.setFont(new Font("Arial Black", Font.BOLD, 13));
-		btnCadastrarDigital.setBounds(437, 234, 100, 30);
-		add(btnCadastrarDigital);
-		
-		JLabel lblDigital = new JLabel("Coloque o dedo indicador");
+		JLabel lblDigital = new JLabel("Coloque o dedo indicador!!");
 		lblDigital.setFont(new Font("Arial Black", Font.BOLD, 13));
-		lblDigital.setBounds(567, 247, 208, 14);
+		lblDigital.setBounds(560, 242, 230, 14);
 		add(lblDigital);
+		lblDigital.setVisible(false);
 		
 		JLabel lblOk = new JLabel("Ok!");
 		lblOk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOk.setFont(new Font("Arial Black", Font.BOLD, 13));
-		lblOk.setBounds(646, 275, 57, 14);
+		lblOk.setBounds(647, 242, 57, 14);
 		add(lblOk);
+		lblOk.setVisible(false);
+		
+		JButton btnCadastrarDigital = new JButton("Digital");
+		btnCadastrarDigital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				lblDigital.setVisible(true);
+			}
+		});
+		btnCadastrarDigital.setFont(new Font("Arial Black", Font.BOLD, 13));
+		btnCadastrarDigital.setBounds(437, 234, 100, 30);
+		add(btnCadastrarDigital);
 
 	}
 }

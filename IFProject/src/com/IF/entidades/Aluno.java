@@ -51,6 +51,5 @@ public class Aluno {
 	public void setNumMatricula(String numMatricula) {
 		NumMatricula = numMatricula;
 	}
-	
 
 }

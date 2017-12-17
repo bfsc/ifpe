@@ -8,9 +8,13 @@ import javax.swing.JTextField;
 
 import com.IF.Main;
 import com.IF.apresentacao.ControladorTurmaJPanel;
+import com.IF.entidades.Aluno;
+import com.IF.negocio.ControladorCadastroAluno;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 
 public class CadastrarTurmaJPanel extends JPanel {
@@ -66,6 +70,10 @@ public class CadastrarTurmaJPanel extends JPanel {
 		listAlunosCadastrados.setBounds(322, 143, 226, 349);
 		add(listAlunosCadastrados);
 		
+		ControladorCadastroAluno controladorCadastroAluno = new ControladorCadastroAluno();
+		ArrayList<Aluno> aluno = controladorCadastroAluno.obterTodosAlunos();
+		listAlunosCadastrados.setListData(aluno.toArray());
+
 		JLabel lblListaDeAlunos_1 = new JLabel("Lista de Alunos da turma");
 		lblListaDeAlunos_1.setFont(new Font("Arial Black", Font.BOLD, 11));
 		lblListaDeAlunos_1.setBounds(589, 118, 185, 14);

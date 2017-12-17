@@ -3,12 +3,19 @@ package com.IF.apresentacao;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+
+import com.IF.entidades.Aluno;
+import com.IF.negocio.ControladorCadastroAluno;
+
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class AtualizarAlunoJPanel extends JPanel {
 	private JTextField textFieldNomeAtt;
@@ -23,6 +30,10 @@ public class AtualizarAlunoJPanel extends JPanel {
 		JList listAluno = new JList();
 		listAluno.setBounds(87, 107, 246, 377);
 		add(listAluno);
+		
+		ControladorCadastroAluno controladorCadastroAluno = new ControladorCadastroAluno();
+		ArrayList<Aluno> aluno = controladorCadastroAluno.obterTodosAlunos();
+		listAluno.setListData(aluno.toArray());
 		
 		JLabel lblAtt = new JLabel("Atualizar / Deletar Aluno");
 		lblAtt.setFont(new Font("Arial Black", Font.BOLD, 20));
