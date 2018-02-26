@@ -71,7 +71,7 @@ public class CadastrarTurmaJPanel extends JPanel {
 		add(listAlunosCadastrados);
 		
 		ControladorCadastroAluno controladorCadastroAluno = new ControladorCadastroAluno();
-		ArrayList<Aluno> aluno = controladorCadastroAluno.obterTodosAlunos();
+		Set<Aluno> aluno = controladorCadastroAluno.obterTodosAlunos();
 		listAlunosCadastrados.setListData(aluno.toArray());
 
 		JLabel lblListaDeAlunos_1 = new JLabel("Lista de Alunos da turma");

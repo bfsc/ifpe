@@ -32,7 +32,7 @@ public class AtualizarAlunoJPanel extends JPanel {
 		add(listAluno);
 		
 		ControladorCadastroAluno controladorCadastroAluno = new ControladorCadastroAluno();
-		ArrayList<Aluno> aluno = controladorCadastroAluno.obterTodosAlunos();
+		Set<Aluno> aluno = controladorCadastroAluno.obterTodosAlunos();
 		listAluno.setListData(aluno.toArray());
 		
 		JLabel lblAtt = new JLabel("Atualizar / Deletar Aluno");

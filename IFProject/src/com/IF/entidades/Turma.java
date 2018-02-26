@@ -2,8 +2,8 @@ package com.IF.entidades;
 
 public class Turma {
 	
-	private String nome;
-	private Aluno aluno;
+	private long id;
+	private String NomeTurma;
 	
 	// Construtor padrao sem parametros em situacoes que seja necessario criar um objeto Endereco sem definir os valores iniciais dos atributos.
 	
@@ -12,34 +12,34 @@ public class Turma {
 	}
 	
 	// Construtor que recebe parametros para iniciar todos os atributos de um objeto Endereco.
-	
-	public Turma(Aluno aluno, String nome) {
-		this.aluno = aluno;
-		this.nome = nome;
+
+
+	public Turma(String NomeTurma) {
+		this.NomeTurma = NomeTurma;
 	}
 	
 	// Metodos públicos
 	
 	public String toString() {
-		return this.nome;
+		return this.NomeTurma;
 	}
 	
 	// Getter and setters
 
-	public String getNome() {
-		return nome;
+	public String getNomeTurma() {
+		return NomeTurma;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String NomeTurma) {
+		this.NomeTurma = NomeTurma;
+	}
+	
+	public long getId() {
+		return id;
 	}
 
-	public Aluno getAluno() {
-		return aluno;
+	public void setId(long id) {
+		this.id = id;
 	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
-
+	
 }

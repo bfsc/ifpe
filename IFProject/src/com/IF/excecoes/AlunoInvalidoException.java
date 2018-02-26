@@ -8,7 +8,6 @@ public class AlunoInvalidoException extends Exception{
 	
 	public AlunoInvalidoException() {
 		
-		
 	}
 	
 	public boolean isNomeVazio() {

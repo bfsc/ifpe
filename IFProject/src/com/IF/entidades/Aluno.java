@@ -4,8 +4,8 @@ public class Aluno {
 	
 	// Atributos
 	
-	private String Nome;
 	private boolean ID;
+	private String Nome;
 	private String NumMatricula;
 	
 	//TESTE!!!!!!!!!!

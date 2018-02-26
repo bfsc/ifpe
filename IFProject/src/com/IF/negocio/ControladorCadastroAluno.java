@@ -30,7 +30,7 @@ public class ControladorCadastroAluno {
 	public ArrayList<Aluno> buscarAlunoPorNome(String nome){
 		ArrayList<Aluno> alunosEncontrados =  new ArrayList<Aluno>();
 		
-		Set<Aluno> listaDeAlunos = (Set<Aluno>) AlunoDAO.getInstancia().listarTodosAlunos();
+		Set<Aluno> listaDeAlunos = AlunoDAO.getInstancia().listarTodosAlunos();
 		for (Aluno aluno : listaDeAlunos) {
 			if(aluno.getNome().toUpperCase().contains(nome.toUpperCase())) {
 				alunosEncontrados.add(aluno);
@@ -40,7 +40,7 @@ public class ControladorCadastroAluno {
 		return alunosEncontrados;
 	}
 	
-	public ArrayList<Aluno> obterTodosAlunos(){
+	public Set<Aluno> obterTodosAlunos(){
 		return  AlunoDAO.getInstancia().listarTodosAlunos();
 	}
 	
@@ -73,12 +73,12 @@ public class ControladorCadastroAluno {
 			alunoInvalidoException.setNomeVazio(true);
 		}
 		
-		if(aluno.getNumMatricula() == null || aluno.getNumMatricula().trim().isEmpty()) {
-			if(alunoInvalidoException == null) {
-				alunoInvalidoException = new AlunoInvalidoException();
-			}
-			alunoInvalidoException.setnumMatriculaVazio(true);
-		}
+		//if(aluno.getNumMatricula() == null || aluno.getNumMatricula().trim().isEmpty()) {
+		//	if(alunoInvalidoException == null) {
+		//		alunoInvalidoException = new AlunoInvalidoException();
+		//	}
+		//	alunoInvalidoException.setnumMatriculaVazio(true);
+		//}
 		
 		return alunoInvalidoException;
 	}

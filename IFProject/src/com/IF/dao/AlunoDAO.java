@@ -6,17 +6,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.IF.JDBC.cnxjdbc;
 import com.IF.entidades.Aluno;
 
 public class AlunoDAO {
 	
+	private final static String ALUNO_COLUNA_NOME = "nome";
+	private final static String ALUNO_COLUNA_MATRICULA = "matricula";
+	
 	//private final String SQL_INSERE_ALUNO = "INSERT INTO \"PUBLIC\".\"ALUNO\"(\"Nome\", \"NumMatricula\" ) VALUES ( ?, ?)" ;
-	private final String SQL_INSERE_ALUNO = "INSERT INTO Aluno" + "(Nome, NumMatricula)" + "values(?,?)";
+	private final String SQL_INSERE_ALUNO = "INSERT INTO tbl_aluno (nome, matricula) values (?,?)";
 	private final String SQL_ALTERA_ALUNO = "UPDATE USUARIOS SET Nome=?, NumMatricula=?";
-	private final String SQL_EXCLUI_ALUNO = "DELETE FROM ALUNOS WHERE Nome=?";
-	private final String SQL_SELECIONA_ALUNO = "SELECT * FROM ALUNOS";
+	private final String SQL_EXCLUI_ALUNO = "DELETE FROM tbl_aluno WHERE Nome=?";
+	private final String SQL_SELECIONA_ALUNO = "SELECT * FROM tbl_aluno";
 	
 	private PreparedStatement pst = null;
 	
@@ -52,19 +57,20 @@ public class AlunoDAO {
 				
 		Connection conn = cnxjdbc.Conection();
 		
-		
 		try {
 			
 			pst = conn.prepareStatement(SQL_INSERE_ALUNO);
 			pst.setString(1, aluno.getNome());
 			pst.setString(2, aluno.getNumMatricula());
-			listaDeAlunos.add(aluno);
 			pst.execute();
 			pst.close();
 			
 			return true;
 		} catch (SQLException e) {
+			e.printStackTrace();
+			
 			System.out.println("Erro ao executar o Statment(Adicionando Aluno)" + e.toString());
+			
 			return false;
 		} finally {
 			cnxjdbc.fecharCNX();
@@ -72,32 +78,38 @@ public class AlunoDAO {
 		
 	}
 	
-	public ArrayList<Aluno> listarTodosAlunos(){
+	public Set<Aluno> listarTodosAlunos(){
 		
-		Connection conn = cnxjdbc.Conection();
 		Aluno aluno;
+		Set<Aluno> retAluno = new HashSet<Aluno>();
+		Connection conn = cnxjdbc.Conection();
 		
 		try {
+			
 			pst = conn.prepareStatement(SQL_SELECIONA_ALUNO);
 			ResultSet rs = pst.executeQuery();
+			
 			while(rs.next()) {
 				aluno = new Aluno();
-				aluno.setNome(rs.getString("NOME"));
-				aluno.setNumMatricula(rs.getString("NumMatricula"));
-				listaDeAlunos.add(aluno);
+				aluno.setNome(rs.getString(ALUNO_COLUNA_NOME));
+				aluno.setNumMatricula(rs.getString(ALUNO_COLUNA_MATRICULA));
+				retAluno.add(aluno);
 			}
+			
 			rs.close();
 			pst.close();
+			
 			cnxjdbc.fecharCNX();
+			
 		} catch (SQLException e) {
 			System.out.println("Erro ao executar o Statement(Listando Aluno)" + e.toString());
 		}
-		return listaDeAlunos;
+		return retAluno;
 	}
 	
 	public boolean alterarAluno(Aluno aluno) {
-		boolean ret = false;
 		
+		boolean ret = false;
 		Connection conn = cnxjdbc.Conection();
 		
 		try {
@@ -107,7 +119,9 @@ public class AlunoDAO {
 			ret = pst.execute();
 			pst.close();
 			cnxjdbc.fecharCNX();
+			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("Erro ao executar o Statment(Alterando aluno)" + e.toString());
 		}
 		return ret;
@@ -119,15 +133,18 @@ public class AlunoDAO {
 		Connection conn = cnxjdbc.Conection();
 	
 		try {
+			
 			pst = conn.prepareStatement(SQL_EXCLUI_ALUNO);
 			pst.setString(1,  aluno.getNome());
 			ret = pst.execute();
 			pst.close();
 			cnxjdbc.fecharCNX();
+			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("Erro ao executar o Statment(Excluindo Aluno)" + e.toString());
 		}
+		
 		return ret;
-}
-	
+	}
 }

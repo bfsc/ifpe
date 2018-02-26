@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 
 import com.IF.Main;
-import com.IF.dao.AlunoDAO;
 import com.IF.entidades.Aluno;
 import com.IF.excecoes.AlunoInvalidoException;
 import com.IF.negocio.ControladorCadastroAluno;
@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 public class CadastrarAlunoJPanel extends JPanel {
 	private JTextField textNomeAluno;
 	private JTextField textNumMatricula;
-
+	
 	/**
 	 * Create the panel.
 	 */
@@ -47,6 +47,7 @@ public class CadastrarAlunoJPanel extends JPanel {
 		lblNmeroDeMatricula.setFont(new Font("Arial Black", Font.BOLD, 13));
 		lblNmeroDeMatricula.setBounds(101, 247, 185, 14);
 		add(lblNmeroDeMatricula);
+
 		
 		textNumMatricula = new JTextField();
 		textNumMatricula.setColumns(10);
@@ -56,18 +57,43 @@ public class CadastrarAlunoJPanel extends JPanel {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				//Criando o objeto aluno.
 				Aluno aluno = new Aluno();
 				
+				//Pegando os atributos inseridos nos campos e setando aos atributos do objeto.
 				aluno.setNome(textNomeAluno.getText());
 				aluno.setNumMatricula(textNumMatricula.getText());
 				
+				//Jogando o objeto ao controlador para testar a validação.
 				try {
+					
 					ControladorCadastroAluno ControladorCadastro = new ControladorCadastroAluno();
 					ControladorCadastro.cadastrarAluno(aluno);
+					
+					//Chamando o dialog caso o aluno seja cadastrado.
+					AlunoCadastrado dialogAlunoCadastrado = new AlunoCadastrado();
+					dialogAlunoCadastrado.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialogAlunoCadastrado.setLocationRelativeTo(null);
+					dialogAlunoCadastrado.setVisible(true);
+					
 				} catch (AlunoInvalidoException excecao) {
-					textNomeAluno.setForeground(Color.BLACK);
-					textNumMatricula.setForeground(Color.BLACK);
-				}
+					
+					//Chamando o dialog caso o nome do aluno seja vazio.
+					if (excecao.isNomeVazio()) {
+						
+						NomeAlunoVazio dialogNomeVazio = new NomeAlunoVazio();
+						dialogNomeVazio.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialogNomeVazio.setLocationRelativeTo(null);
+						dialogNomeVazio.setVisible(true);
+			
+					} 
+					
+				} 
+				
+				//Limpando o campo de texto da tela.
+				textNomeAluno.setText("");
+				textNumMatricula.setText("");
 				
 			}
 		});
@@ -76,6 +102,14 @@ public class CadastrarAlunoJPanel extends JPanel {
 		add(btnCadastrar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//Limpando o campo de texto da tela.
+				textNomeAluno.setText("");
+				textNumMatricula.setText("");
+			}
+		});
 		btnLimpar.setFont(new Font("Arial Black", Font.BOLD, 13));
 		btnLimpar.setBounds(336, 520, 120, 30);
 		add(btnLimpar);

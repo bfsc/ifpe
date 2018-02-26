@@ -8,10 +8,10 @@ public class cnxjdbc {
 	
 	private final static String DRIVER_CLASS = "org.hsqldb.jdbcDriver";
 	private static Connection conn = null;
-	private static String usuario = "gcrs";
+	private static String usuario = "sa";
 	private static String senha = "";
-	private static String PathBase = "C:\\Users\\Gabriel\\git\\ifpe\\IFProject\\base\\DataBase";
-	private final static String URL = "jdbc:hsqldb:file:" + PathBase + ";shutdown=true;hsqldb.write_delay=false";
+	public final static String DB_FOLDER_PATH = System.getProperty("user.home") + "\\.ifdb";
+	private final static String URL = "jdbc:hsqldb:hsql://localhost/if;shutdown=true;hsqldb.write_delay=false";
 	
 	public static Connection Conection() {
 		
