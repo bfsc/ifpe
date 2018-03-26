@@ -11,17 +11,20 @@ import java.util.Set;
 
 import com.IF.JDBC.cnxjdbc;
 import com.IF.entidades.Aluno;
+import com.IF.entidades.Disciplina;
 
 public class AlunoDAO {
 	
+	//Constantes.
 	private final static String ALUNO_COLUNA_NOME = "nome";
 	private final static String ALUNO_COLUNA_MATRICULA = "matricula";
 	
-	//private final String SQL_INSERE_ALUNO = "INSERT INTO \"PUBLIC\".\"ALUNO\"(\"Nome\", \"NumMatricula\" ) VALUES ( ?, ?)" ;
+	//Comandos SQL em composições.
 	private final String SQL_INSERE_ALUNO = "INSERT INTO tbl_aluno (nome, matricula) values (?,?)";
-	private final String SQL_ALTERA_ALUNO = "UPDATE USUARIOS SET Nome=?, NumMatricula=?";
+	private final String SQL_ALTERA_ALUNO = "UPDATE aluno SET Nome=?, NumMatricula=?";
 	private final String SQL_EXCLUI_ALUNO = "DELETE FROM tbl_aluno WHERE Nome=?";
-	private final String SQL_SELECIONA_ALUNO = "SELECT * FROM tbl_aluno";
+	private final String SQL_SELECIONA_TODOS_ALUNOS = "SELECT * FROM tbl_aluno";
+	private final String SQL_SELECIONA_ALUNO = "select * from tbl_aluno (nome) values (?)";
 	
 	private PreparedStatement pst = null;
 	
@@ -86,7 +89,7 @@ public class AlunoDAO {
 		
 		try {
 			
-			pst = conn.prepareStatement(SQL_SELECIONA_ALUNO);
+			pst = conn.prepareStatement(SQL_SELECIONA_TODOS_ALUNOS);
 			ResultSet rs = pst.executeQuery();
 			
 			while(rs.next()) {

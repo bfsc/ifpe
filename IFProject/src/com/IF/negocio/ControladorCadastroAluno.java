@@ -61,6 +61,12 @@ public class ControladorCadastroAluno {
 		AlunoDAO.getInstancia().deletarAluno(aluno);
 	}
 	
+	public void selecionarAluno(Aluno aluno) throws AlunoInvalidoException {
+		
+		
+		
+	}
+	
 	//Metodos Privados
 	
 	private AlunoInvalidoException validarAluno(Aluno aluno) {

@@ -6,35 +6,42 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 import com.IF.Main;
-import com.IF.apresentacao.ControladorTurmaJPanel;
+import com.IF.apresentacao.ControladorDisciplinaJPanel;
+import com.IF.entidades.Disciplina;
+import com.IF.negocio.ControladorCadastroDisciplina;
 import com.IF.apresentacao.ChamadaJPanel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 
-public class TurmasJPanel extends JPanel {
+public class DisciplinaJPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public TurmasJPanel() {
+	public DisciplinaJPanel() {
 		setLayout(null);
 		setSize(800, 600);
 		
-		JLabel lblTurmas = new JLabel("Turmas");
-		lblTurmas.setFont(new Font("Arial Black", Font.BOLD, 20));
-		lblTurmas.setBounds(357, 47, 108, 29);
-		add(lblTurmas);
+		JLabel lblDisciplinas = new JLabel("Disciplinas");
+		lblDisciplinas.setFont(new Font("Arial Black", Font.BOLD, 20));
+		lblDisciplinas.setBounds(357, 47, 108, 29);
+		add(lblDisciplinas);
 		
-		JList listListaMateria = new JList();
-		listListaMateria.setBounds(202, 119, 401, 159);
-		add(listListaMateria);
+		JList listListaDisciplina = new JList();
+		listListaDisciplina.setBounds(202, 119, 401, 159);
+		add(listListaDisciplina);
+		
+		ControladorCadastroDisciplina controladorCadastroDisciplina = new ControladorCadastroDisciplina();
+		Set<Disciplina> disciplina = controladorCadastroDisciplina.obterTodasAsDisciplinas();
+		listListaDisciplina.setListData(disciplina.toArray());
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getFrame().setContentPane(new ControladorTurmaJPanel());
+				Main.getFrame().setContentPane(new ControladorDisciplinaJPanel());
 				Main.getFrame().getContentPane().revalidate();
 			}
 		});
@@ -45,7 +52,7 @@ public class TurmasJPanel extends JPanel {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getFrame().setContentPane(new CadastrarTurmaJPanel());
+				Main.getFrame().setContentPane(new CadastrarDisciplinaJPanel());
 				Main.getFrame().getContentPane().revalidate();
 			}
 		});
@@ -54,6 +61,19 @@ public class TurmasJPanel extends JPanel {
 		add(btnAtualizar);
 		
 		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Disciplina disciplina =  (Disciplina) listListaDisciplina.getSelectedValue();
+				
+				ControladorCadastroDisciplina controladorCadastroDisciplina = new ControladorCadastroDisciplina();
+				controladorCadastroDisciplina.deletarDisciplina(disciplina);
+				
+				Set<Disciplina> disciplinas = controladorCadastroDisciplina.obterTodasAsDisciplinas();
+				listListaDisciplina.setListData(disciplinas.toArray());
+				
+			}
+		});
 		btnDeletar.setFont(new Font("Arial Black", Font.BOLD, 13));
 		btnDeletar.setBounds(345, 383, 120, 30);
 		add(btnDeletar);

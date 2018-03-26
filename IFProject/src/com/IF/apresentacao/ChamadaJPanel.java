@@ -7,7 +7,7 @@ import javax.swing.JList;
 import javax.swing.SwingConstants;
 
 import com.IF.Main;
-import com.IF.apresentacao.TurmasJPanel;
+import com.IF.apresentacao.DisciplinaJPanel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -22,14 +22,14 @@ public class ChamadaJPanel extends JPanel {
 		setLayout(null);
 		setSize(800, 600);
 		
-		JLabel lblAlunosTurma = new JLabel("Lista de Alunos da turma");
-		lblAlunosTurma.setFont(new Font("Arial Black", Font.BOLD, 11));
-		lblAlunosTurma.setBounds(103, 122, 185, 14);
-		add(lblAlunosTurma);
+		JLabel lblAlunosDaDisciplina = new JLabel("Lista de Alunos da Disciplina");
+		lblAlunosDaDisciplina.setFont(new Font("Arial Black", Font.BOLD, 11));
+		lblAlunosDaDisciplina.setBounds(103, 122, 185, 14);
+		add(lblAlunosDaDisciplina);
 		
-		JList listAlunosTurma = new JList();
-		listAlunosTurma.setBounds(79, 147, 226, 349);
-		add(listAlunosTurma);
+		JList listAlunosDaDisciplina = new JList();
+		listAlunosDaDisciplina.setBounds(79, 147, 226, 349);
+		add(listAlunosDaDisciplina);
 		
 		JLabel lblAlunosPresente = new JLabel("Lista de Alunos presentes");
 		lblAlunosPresente.setFont(new Font("Arial Black", Font.BOLD, 11));
@@ -43,7 +43,7 @@ public class ChamadaJPanel extends JPanel {
 		JButton button = new JButton("Voltar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getFrame().setContentPane(new TurmasJPanel());
+				Main.getFrame().setContentPane(new DisciplinaJPanel());
 				Main.getFrame().getContentPane().revalidate();
 			}
 		});

@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import com.IF.Main;
 import com.IF.apresentacao.InicioJPanel;
 import com.IF.apresentacao.ControladorAlunoJPanel;
-import com.IF.apresentacao.ControladorTurmaJPanel;
+import com.IF.apresentacao.ControladorDisciplinaJPanel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -23,16 +23,16 @@ public class AcessoJPanel extends JPanel {
 		setLayout(null);
 		setSize(800, 600);
 		
-		JButton btnTurma = new JButton("Turma");
-		btnTurma.addActionListener(new ActionListener() {
+		JButton btnDisciplina = new JButton("Disciplina");
+		btnDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getFrame().setContentPane(new ControladorTurmaJPanel());
+				Main.getFrame().setContentPane(new ControladorDisciplinaJPanel());
 				Main.getFrame().getContentPane().revalidate();
 			}
 		});
-		btnTurma.setFont(new Font("Arial Black", Font.BOLD, 15));
-		btnTurma.setBounds(221, 310, 120, 30);
-		add(btnTurma);
+		btnDisciplina.setFont(new Font("Arial Black", Font.BOLD, 15));
+		btnDisciplina.setBounds(221, 310, 120, 30);
+		add(btnDisciplina);
 		
 		JButton btnAluno = new JButton("Aluno");
 		btnAluno.addActionListener(new ActionListener() {

@@ -65,9 +65,9 @@ public class CadastrarAlunoJPanel extends JPanel {
 				aluno.setNome(textNomeAluno.getText());
 				aluno.setNumMatricula(textNumMatricula.getText());
 				
-				//Jogando o objeto ao controlador para testar a validação.
 				try {
 					
+					//Jogando o objeto ao controlador para testar a validação.
 					ControladorCadastroAluno ControladorCadastro = new ControladorCadastroAluno();
 					ControladorCadastro.cadastrarAluno(aluno);
 					
@@ -79,7 +79,7 @@ public class CadastrarAlunoJPanel extends JPanel {
 					
 				} catch (AlunoInvalidoException excecao) {
 					
-					//Chamando o dialog caso o nome do aluno seja vazio.
+					//Chamando o dialog se o nome do aluno seja vazio.
 					if (excecao.isNomeVazio()) {
 						
 						NomeAlunoVazio dialogNomeVazio = new NomeAlunoVazio();

@@ -11,35 +11,35 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ControladorTurmaJPanel extends JPanel {
+public class ControladorDisciplinaJPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public ControladorTurmaJPanel() {
+	public ControladorDisciplinaJPanel() {
 		setLayout(null);
 		setSize(800, 600);
 		
-		JLabel lblControladorTurma = new JLabel("Controlador de Turmas");
-		lblControladorTurma.setFont(new Font("Arial Black", Font.BOLD, 20));
-		lblControladorTurma.setBounds(260, 54, 272, 29);
-		add(lblControladorTurma);
+		JLabel lblControladorDisciplina = new JLabel("Controlador de Disciplinas");
+		lblControladorDisciplina.setFont(new Font("Arial Black", Font.BOLD, 20));
+		lblControladorDisciplina.setBounds(260, 54, 272, 29);
+		add(lblControladorDisciplina);
 		
-		JButton btnCadastrarTurmas = new JButton("Cadastrar");
-		btnCadastrarTurmas.addActionListener(new ActionListener() {
+		JButton btnCadastrarDisciplinas = new JButton("Cadastrar");
+		btnCadastrarDisciplinas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getFrame().setContentPane(new CadastrarTurmaJPanel());
+				Main.getFrame().setContentPane(new CadastrarDisciplinaJPanel());
 				Main.getFrame().getContentPane().revalidate();
 			}
 		});
-		btnCadastrarTurmas.setFont(new Font("Arial Black", Font.BOLD, 13));
-		btnCadastrarTurmas.setBounds(337, 168, 120, 30);
-		add(btnCadastrarTurmas);
+		btnCadastrarDisciplinas.setFont(new Font("Arial Black", Font.BOLD, 13));
+		btnCadastrarDisciplinas.setBounds(337, 168, 120, 30);
+		add(btnCadastrarDisciplinas);
 		
 		JButton btnChamada = new JButton("Chamada");
 		btnChamada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.getFrame().setContentPane(new TurmasJPanel());
+				Main.getFrame().setContentPane(new DisciplinaJPanel());
 				Main.getFrame().getContentPane().revalidate();
 			}
 		});
